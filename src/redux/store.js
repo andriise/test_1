@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { followersReducer } from './followersSlice';
+const { configureStore } = require("@reduxjs/toolkit");
+const { followersReducer } = require("./followersSlice");
 
-export const store = () =>
-  configureStore({
-    reducer: {
-      followers: followersReducer,
-    },
-  });
+
+
+export const store = configureStore({
+	reducer: 
+		followersReducer,
+})

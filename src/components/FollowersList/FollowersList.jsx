@@ -1,11 +1,12 @@
 import Followers from 'components/Followers/Followers';
-// import BackEnd from 'components/BackEnd/BackEnd';
+import './FollowersList.css'
 
 const FollowersList = () => {
 	return (
-		<Followers />
-
-	);
+    <ul className='followersList'>
+      <Followers />
+    </ul>
+  );
 };
 
 export default FollowersList;
