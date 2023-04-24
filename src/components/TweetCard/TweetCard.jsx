@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Button } from '../Button/Button';
 import { ItemContainer, ImgContainer, ImgBox, Text } from './TweetCard.styled';
 import { updateUserData } from '../../services/services';
 import * as userBoy from '../../images/boy.png';
+import { BtnFollow, BtnFollowed } from './TweetCardBtn.styled';
+import PropTypes from 'prop-types';
 
 export const TweetCard = ({
   user,
@@ -20,8 +21,8 @@ export const TweetCard = ({
       updateUserData(id, {
         user,
         avatar,
-		  followed: !isFollow,
-		tweets,
+        followed: !isFollow,
+        tweets,
         followers: followersCount - 1,
       });
       setFollowersCount(followersCount - 1);
@@ -30,8 +31,8 @@ export const TweetCard = ({
       updateUserData(id, {
         user,
         avatar,
-		  followed: !isFollow,
-		tweets,
+        followed: !isFollow,
+        tweets,
         followers: followersCount + 1,
       });
       setFollowersCount(followersCount + 1);
@@ -52,11 +53,24 @@ export const TweetCard = ({
       </ImgContainer>
       <Text>{tweets} TWEETS</Text>
       <Text>{followersCount.toLocaleString('en-US')} FOLLOWERS</Text>
-      <Button
-        text={isFollow ? 'Following' : 'Follow'}
-        onClick={handleClickButton}
-        selected={isFollow}
-      />
+      {isFollow ? (
+        <BtnFollowed onClick={handleClickButton} selected={isFollow}>
+          Following
+        </BtnFollowed>
+      ) : (
+        <BtnFollow onClick={handleClickButton} selected={isFollow}>
+          Follow
+        </BtnFollow>
+      )}
     </ItemContainer>
   );
+};
+
+TweetCard.propTypes = {
+  user: PropTypes.string,
+  tweets: PropTypes.number.isRequired,
+  followers: PropTypes.number.isRequired,
+  avatar: PropTypes.string,
+  followed: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
 };
